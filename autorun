@@ -83,12 +83,12 @@ fi
 echo -e "최종 명령줄\nserver: $COMMAND_S\nclient: $COMMAND_C"
 echo "설치 경로 $PATHS"
 
-TEST="express"
-
 mkdir "$BASE_PATH/$PATHS"
 cd "$_"
 
 yarn add $COMMAND_S
+
+touch server.js .env
 
 mkdir client/
 
@@ -97,5 +97,9 @@ cd "$BASE_PATH/$PATHS/client/"
 yarn create react-app .
 
 yarn add $COMMAND_C
+
+touch .env
+
+mkdir src/{components/{atoms,molecules,organisms,templates},pages,hooks,store,modules}
 
 echo "$BASE_PATH/$PATHS 로 이동하세요"
