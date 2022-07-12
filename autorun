@@ -10,7 +10,7 @@ PATHS=$1
 COMMAND_S=""
 COMMAND_C=""
 
-SERVER="express cors socket.io"
+SERVER="express cors socket.io concurrently express-fileupload ffmpeg fluent-ffmpeg nodemon"
 
 # react-router-dom
 ROUTER="react-router-dom"
@@ -100,6 +100,6 @@ yarn add $COMMAND_C
 
 touch .env
 
-mkdir src/{components/{atoms,molecules,organisms,templates},pages,hooks,store,modules}
+mkdir -p src/{components/{atoms,molecules,organisms,templates},pages,hooks,store,modules}
 
 echo "$BASE_PATH/$PATHS 로 이동하세요"
