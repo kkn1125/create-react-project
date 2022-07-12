@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+
+# mkdir && cd $_ && yarn create react-app . app . && yarn add
+
+BASE_PATH="D:/kkn/vscode/study"
+
+ALL=$*
+PATHS=$1
+
+COMMAND_S=""
+COMMAND_C=""
+
+SERVER="express cors socket.io"
+
+# react-router-dom
+ROUTER="react-router-dom"
+# css
+STYLED="styled-components"
+# redux
+REDUX="redux @reduxjs/toolkit redux-thunk react-redux"
+
+# options
+PROXY="http-proxy-middleware"
+ENV="dotenv"
+SOCKET_C="socket.io-client"
+
+echo "해당 경로에 react 프로젝트를 생성합니다. 타겟 경로: $BASE_PATH/$PATHS/"
+
+echo "디렉토리 명 : $PATHS"
+
+server() {
+  COMMAND_S="$COMMAND_S $SERVER"
+  echo $COMMAND_S
+}
+
+css() {
+  COMMAND_C="$COMMAND_C $STYLED"
+  echo $COMMAND_C
+}
+
+redux() {
+  COMMAND_C="$COMMAND_C $REDUX"
+  echo $COMMAND_C
+}
+
+client() {
+  COMMAND_C="$COMMAND_C $ROUTER $PROXY $ENV $SOCKET_C"
+  echo $COMMAND_C
+}
+
+COMMAND_C=$(client)
+
+if [[ $ALL == *"-y" ]]; then
+  echo -e "서버 설정: ✅"
+  COMMAND_S=$(server)
+  echo -e "css 설정: ✅"
+  COMMAND_C=$(css)
+  echo -e "redux 설정: ✅"
+  COMMAND_C=$(redux)
+  COMMAND_C=$(client)
+else
+  if [[ $ALL == *"-server" ]]; then
+    echo "server setting done ✅"
+    COMMAND_S=$(server)
+  fi
+
+  if [[ $ALL == *"-https" ]]; then
+    echo "https setting done ✅"
+    COMMAND_C=$(https)
+  fi
+
+  if [[ $ALL == *"-css" ]]; then
+    echo "css setting done ✅"
+    COMMAND_C=$(css)
+  fi
+
+  if [[ $ALL == *"-redux" ]]; then
+    echo "redux setting done ✅"
+    COMMAND_C=$(redux)
+  fi
+fi
+
+echo -e "최종 명령줄\nserver: $COMMAND_S\nclient: $COMMAND_C"
+echo "설치 경로 $PATHS"
+
+TEST="express"
+
+mkdir "$BASE_PATH/$PATHS"
+cd "$_"
+
+yarn add $COMMAND_S
+
+mkdir client/
+
+cd "$BASE_PATH/$PATHS/client/"
+
+yarn create react-app .
+
+yarn add $COMMAND_C
+
+echo "$BASE_PATH/$PATHS 로 이동하세요"
