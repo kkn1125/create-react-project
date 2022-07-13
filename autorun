@@ -10,7 +10,7 @@ PATHS=$1
 COMMAND_S=""
 COMMAND_C=""
 
-SERVER="express cors socket.io concurrently express-fileupload ffmpeg fluent-ffmpeg nodemon"
+SERVER="express cors socket.io concurrently express-fileupload ffmpeg fluent-ffmpeg nodemon dotenv axios"
 
 # react-router-dom
 ROUTER="react-router-dom"
@@ -44,7 +44,7 @@ redux() {
 }
 
 client() {
-  COMMAND_C="$COMMAND_C $ROUTER $PROXY $ENV $SOCKET_C"
+  COMMAND_C="$COMMAND_C dotenv axios ffmpeg fluent-ffmpeg $ROUTER $PROXY $ENV $SOCKET_C"
   echo $COMMAND_C
 }
 
